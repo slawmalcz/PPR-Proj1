@@ -17,30 +17,37 @@ public class Main {
         System.out.println(number1.toString());
         number1.saveProgres();
 
-        testowa();
+        try {
+            Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+            autoSave(scheduler);
+
+
+            scheduler.start();
+            scheduler.shutdown();
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
-    public static void testowa(){
-
-        try{
-            Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
-            JobDetail autosave = newJob(AutoSaveJob.class)
+    public static void autoSave(Scheduler scheduler){
+        JobDetail autosave = newJob(AutoSaveJob.class)
                     .withIdentity("autosave","group1")
                     .build();
-            Trigger autoSaveTrigger = newTrigger()
+        Trigger autoSaveTrigger = newTrigger()
                     .withIdentity("autosavetrigger","group1")
                     .startNow()
                     .withSchedule(cronSchedule("0/30 0 0 ? * * *"))
                     .build();
-
-            scheduler.start();
+        try {
             scheduler.scheduleJob(autosave,autoSaveTrigger);
-
-            scheduler.shutdown();
-
-        }catch(SchedulerException se){
-            System.out.println(se.getMessage());
+        } catch (SchedulerException e) {
+            e.printStackTrace();
         }
+    }
+
+    public static void timeCheck(Scheduler scheduler){
+        //JobDetail timechech =
     }
 }
