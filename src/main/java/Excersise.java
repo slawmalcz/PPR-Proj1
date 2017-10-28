@@ -14,7 +14,7 @@ public class Excersise {
 
     @Override
     public String toString(){
-        String output = "";
+        String output;
         output = "Zad nr."+getID()+"\n\n"+getRespond();
         return output;
     }
@@ -25,7 +25,7 @@ public class Excersise {
     public int getID(){
         return ID;
     }
-    private void setRespond(String newRespond) {
+    public void setRespond(String newRespond) {
         respond = newRespond;
     }
     public String getRespond(){
