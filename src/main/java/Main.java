@@ -1,8 +1,12 @@
-import org.quartz.*;
+import org.quartz.JobDetail;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
+
 import static org.quartz.JobBuilder.newJob;
-import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
+import static org.quartz.CronScheduleBuilder.cronSchedule;
 
 public class Main {
 
@@ -27,22 +31,16 @@ public class Main {
             Trigger autoSaveTrigger = newTrigger()
                     .withIdentity("autosavetrigger","group1")
                     .startNow()
-                    .withSchedule(simpleSchedule()
-                            .withIntervalInSeconds(2)
-                            .repeatForever()
-                    ).build();
+                    .withSchedule(cronSchedule("0/30 0 0 ? * * *"))
+                    .build();
 
             scheduler.start();
             scheduler.scheduleJob(autosave,autoSaveTrigger);
-
-            Thread.sleep(1000);
 
             scheduler.shutdown();
 
         }catch(SchedulerException se){
             System.out.println(se.getMessage());
-        } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
         }
     }
 }
