@@ -1,9 +1,9 @@
 public class Main {
 
     public static void main(String [] args){
-        Excersise test = new Excersise(1,"Too long to test right");
-        System.out.println(test.toString());
+        Lesson number1 = new Lesson(1);
+        number1.setAnswers(0,"Ala ma kota ale kot nie slucha ali");
 
-        System.out.println("Hello World");
+        System.out.println(number1.toString());
     }
 }

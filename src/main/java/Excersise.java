@@ -15,15 +15,15 @@ public class Excersise {
     @Override
     public String toString(){
         String output;
-        output = "Zad nr."+getID()+"\n\n"+getRespond();
+        output = "Zad nr."+getID()+1+"\n\n"+getRespond();
         return output;
     }
 
     private void setID(int newID){
-        ID = newID-1;
+        ID = newID;
     }
     public int getID(){
-        return ID+1;
+        return ID;
     }
     public void setRespond(String newRespond) {
         respond = newRespond;
