@@ -25,7 +25,7 @@ public class Lesson {
 
     public Boolean saveProgres(){
         try{
-            PrintWriter file = new PrintWriter(getName()+".txt","UTF-8");
+            PrintWriter file = new PrintWriter("odp.txt","UTF-8");
             file.write(toString());
             file.close();
             return true;
