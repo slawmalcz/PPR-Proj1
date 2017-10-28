@@ -9,7 +9,7 @@ public class Lesson {
 
     Lesson(int numberOfExercise){
         for(int i=0;i<numberOfExercise;i++){
-            answers.add(new Excersise(i,""));
+            answers.add(new Excersise(i));
         }
         this.setName();
     }

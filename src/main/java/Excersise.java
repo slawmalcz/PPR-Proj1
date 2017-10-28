@@ -6,6 +6,7 @@ public class Excersise {
 
     Excersise(int newID){
         this.setID(newID);
+        this.respond="";
     }
     Excersise(int newID,String newRespond){
         this.setID(newID);
@@ -26,7 +27,22 @@ public class Excersise {
         return ID;
     }
     public void setRespond(String newRespond) {
-        respond = newRespond;
+        try{
+            if(newRespond.matches("SELECT(.*)FROM(.*)")&&
+                    (newRespond.matches("(.*)WHERE(.*)")||
+                    newRespond.matches("(.*)ORDER BY(.*)"))){
+                respond = newRespond;
+            }else{
+                throw new Exception(){
+                    @Override
+                    public String getMessage() {
+                        return "Respond don't matches formula: * SELECT * FROM * WHERE * ORDER BY *";
+                    }
+                };
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
     public String getRespond(){
         return respond;
