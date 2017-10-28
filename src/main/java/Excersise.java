@@ -20,10 +20,10 @@ public class Excersise {
     }
 
     private void setID(int newID){
-        ID = newID;
+        ID = newID-1;
     }
     public int getID(){
-        return ID;
+        return ID+1;
     }
     public void setRespond(String newRespond) {
         respond = newRespond;
