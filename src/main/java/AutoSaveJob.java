@@ -6,7 +6,7 @@ public class AutoSaveJob implements Job {
     }
     public void execute(JobExecutionContext jobExecutionContext)
             throws JobExecutionException {
-        //activeLesson.saveProgres();
+        Lesson.getInstance().saveProgres();
         System.out.println("Dzialam");
     }
 }

@@ -7,11 +7,24 @@ public class Lesson {
     private List<Excersise> answers = new ArrayList<Excersise>();
     private String name;
 
-    Lesson(int numberOfExercise){
+    private static Lesson instance = null;
+
+    protected Lesson(int numberOfExercise){
         for(int i=0;i<numberOfExercise;i++){
             answers.add(new Excersise(i));
         }
         this.setName();
+    }
+
+    public static Lesson getInstance(int numberOfExercise){
+        if(instance == null){
+            instance = new Lesson(numberOfExercise);
+        }
+        return instance;
+    }
+
+    public static Lesson getInstance() {
+        return instance;
     }
 
     @Override
