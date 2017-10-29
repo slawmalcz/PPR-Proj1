@@ -4,6 +4,10 @@ import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 import static org.quartz.CronScheduleBuilder.cronSchedule;
@@ -16,6 +20,8 @@ public class Main {
 
         System.out.println(number1.toString());
         number1.saveProgres();
+
+
 
         try {
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
