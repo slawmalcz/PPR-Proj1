@@ -26,15 +26,41 @@ public class Main {
         try {
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
             autoSave(scheduler);
+            timeOutDispenser(scheduler);
 
 
             scheduler.start();
+
+            System.out.println("zapuszczona schedulery czekamy na rozwoj wydarze: \n");
+            try {
+                Thread.sleep(15000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             scheduler.shutdown();
         } catch (SchedulerException e) {
             e.printStackTrace();
         }
 
+    }
 
+    public static void timeOutDispenser(Scheduler scheduler){
+        JobDetail timeOut = newJob(TimeCheckJob.class)
+                .withIdentity("timeCheck","group2")
+                .build();
+        Trigger timeOutTrigger = newTrigger()
+                .withIdentity("timeOutTrigger","group2")
+                .startNow()
+                //.withSchedule(cronSchedule("0 * 8-19 ? * MON,TUE,WED,THU,FRI *"))
+                .withSchedule(cronSchedule("0/5 * * ? * * *"))
+                .build();
+
+        try {
+            scheduler.scheduleJob(timeOut,timeOutTrigger);
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void autoSave(Scheduler scheduler){
@@ -44,16 +70,12 @@ public class Main {
         Trigger autoSaveTrigger = newTrigger()
                     .withIdentity("autosavetrigger","group1")
                     .startNow()
-                    .withSchedule(cronSchedule("0/30 0 0 ? * * *"))
+                    .withSchedule(cronSchedule("0/30 * * ? * * *"))
                     .build();
         try {
             scheduler.scheduleJob(autosave,autoSaveTrigger);
         } catch (SchedulerException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void timeCheck(Scheduler scheduler){
-        //JobDetail timechech =
     }
 }
