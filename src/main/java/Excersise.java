@@ -28,7 +28,7 @@ public class Excersise {
     }
     public void setRespond(String newRespond) {
         try{
-            if(newRespond.matches("SELECT(.*)FROM(.*)")&&
+            if(newRespond.matches("(.*)SELECT(.*)FROM(.*)")||
                     (newRespond.matches("(.*)WHERE(.*)")||
                     newRespond.matches("(.*)ORDER BY(.*)"))){
                 respond = newRespond;
